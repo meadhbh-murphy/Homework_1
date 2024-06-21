@@ -1,0 +1,69 @@
+---
+title: "STAT 40830: Homework 1"
+author: "Meadhbh Murphy - 22208515"
+date: today
+date-format: iso
+format: 
+  pdf:
+    toc: true
+    toc-title: "Table of Contents"
+    number-sections: true
+execute: 
+  eval: true
+  echo: false
+---
+
+```{r}
+#| label: packages
+#| echo: false
+#| message: false
+
+# load required libraries
+library(ggplot2)
+```
+\newpage
+
+## The Dataset
+
+I have chosen to use the \textcolor{orange}{Growth of Orange Trees} data set which contains age and trunk circumference measurements for 5 orange trees over a number of years.
+
+The data set contains 3 variables
+
+- _Tree_: An indicator of the tree on which the measurements were taken.
+
+- _age_: The age of the tree measured in days since 1968-12-31.
+
+- _circumference_: The circumference of the tree in mm.
+
+
+```{r}
+#| label: data import
+
+# import the data set
+data("Orange")
+```
+
+
+## Graph
+In the below graph I have plotted the age and circumerference of each of the trees at each measurement interval.
+
+```{r}
+#| fig-cap: "Growth of Orange Trees"
+#| fig-cap-location: bottom
+#| fig-width: 7
+#| fig-height: 4.5
+
+# reorder factor so legend will display trees in order
+Orange$Tree <- factor(Orange$Tree, levels=c(1,2,3,4,5))
+
+# plot circumference vs age with tree as the colour
+ggplot(Orange, aes(x = age, y = circumference, col = Tree)) + 
+  geom_point() + 
+  ggtitle("Orange Trees: Circumference vs Age") + 
+  xlab("Age (days since 1968-12-31)") +
+  ylab("Circumference (mm)")
+```
+
+It is clear that while all of the orange trees started at a similar size, each tree has grown at a different rate. The circumference of __Tree 4__ has increased the most over the observation period, with a final circumference of `r max(Orange$circumference[Orange$Tree == 4])`. In contrast __Tree 3__ has grown the least over the observation period. 
+
+It is also obvious from the plot that the growth in circumference of the orange trees is not linear with age. While at younger ages this appears to be somewhat true, across the last 4 measurement periods there are plateaus in the graph. This indicates that very little growth occurred in any of the trees particularly between the ages of `r sort(unique(Orange$age))[6]` and `r sort(unique(Orange$age))[7]` days. Further investigation would be required to determine if this slowdown in growth is related to the age of the trees or if could be caused by other environmental factors such as weather.
