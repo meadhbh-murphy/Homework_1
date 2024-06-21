@@ -68,3 +68,5 @@ ggplot(Orange, aes(x = age, y = circumference, col = Tree)) +
 It is clear that while all of the orange trees started at a similar size, each tree has grown at a different rate. The circumference of __Tree 4__ has increased the most over the observation period, with a final circumference of `r max(Orange$circumference[Orange$Tree == 4])`. In contrast __Tree 3__ has grown the least over the observation period. 
 
 It is also obvious from the plot that the growth in circumference of the orange trees is not linear with age. While at younger ages this appears to be somewhat true, across the last 4 measurement periods there are plateaus in the graph. This indicates that very little growth occurred in any of the trees particularly between the ages of `r sort(unique(Orange$age))[6]` and `r sort(unique(Orange$age))[7]` days. Further investigation would be required to determine if this slowdown in growth is related to the age of the trees or if could be caused by other environmental factors such as weather.
+
+Regression lines were added to the above plot to illustrate the different behaviour of each tree.
