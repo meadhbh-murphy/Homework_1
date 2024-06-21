@@ -59,6 +59,7 @@ Orange$Tree <- factor(Orange$Tree, levels=c(1,2,3,4,5))
 # plot circumference vs age with tree as the colour
 ggplot(Orange, aes(x = age, y = circumference, col = Tree)) + 
   geom_point() + 
+  geom_smooth(method = "lm", fill = NA)+
   ggtitle("Orange Trees: Circumference vs Age") + 
   xlab("Age (days since 1968-12-31)") +
   ylab("Circumference (mm)")
